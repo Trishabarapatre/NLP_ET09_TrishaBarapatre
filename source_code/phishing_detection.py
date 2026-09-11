@@ -24,7 +24,7 @@ nltk.download('stopwords')
 # -----------------------------
 # 1. Load Dataset
 # -----------------------------
-df = pd.read_csv("dataset/spam.csv", encoding="latin-1")
+df = pd.read_csv("../dataset/spam.csv", encoding="latin-1")
 
 # Dataset has extra unnamed columns, keep only useful ones
 df = df[['v1', 'v2']]
@@ -100,7 +100,7 @@ plt.xlabel('Predicted')
 plt.ylabel('Actual')
 plt.title('Confusion Matrix - Phishing Message Detection')
 plt.tight_layout()
-plt.savefig("output/confusion_matrix.png")
+plt.savefig("../output/confusion_matrix.png")
 plt.show()
 
 # -----------------------------
@@ -120,3 +120,18 @@ print("\n----- Sample Predictions -----")
 for msg, pred in zip(sample_messages, sample_pred):
     label = "SPAM/PHISHING" if pred == 1 else "SAFE (HAM)"
     print(f"Message: {msg}\nPrediction: {label}\n")
+
+    # -----------------------------
+# 9. Interactive / Live Check
+# -----------------------------
+print("\n===== Live Message Checker =====")
+while True:
+    user_input = input("\nEnter a message to check (or type 'exit' to quit): ")
+    if user_input.lower() == 'exit':
+        print("Exiting... Thank you!")
+        break
+    clean_input = clean_text(user_input)
+    input_vec = vectorizer.transform([clean_input]).toarray()
+    prediction = model.predict(input_vec)
+    result = "SPAM/PHISHING ⚠️" if prediction[0] == 1 else "SAFE (HAM) ✅"
+    print(f"Prediction: {result}")
