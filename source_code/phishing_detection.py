@@ -24,7 +24,7 @@ nltk.download('stopwords')
 # -----------------------------
 # 1. Load Dataset
 # -----------------------------
-df = pd.read_csv("../dataset/spam.csv", encoding="latin-1")
+df = pd.read_csv("dataset/spam.csv", encoding="latin-1")
 
 # Dataset has extra unnamed columns, keep only useful ones
 df = df[['v1', 'v2']]
@@ -100,7 +100,7 @@ plt.xlabel('Predicted')
 plt.ylabel('Actual')
 plt.title('Confusion Matrix - Phishing Message Detection')
 plt.tight_layout()
-plt.savefig("../output/confusion_matrix.png")
+plt.savefig("output/confusion_matrix.png")
 plt.show()
 
 # -----------------------------
